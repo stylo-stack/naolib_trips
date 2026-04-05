@@ -9,7 +9,7 @@ export async function search(
 ): Promise<SearchResponse> {
   const response = await axios.get<SearchResponse>(BASE_URL, {
     params,
-    headers: await buildHeaders(),
+    headers: buildHeaders(),
   });
   return response.data;
 }
