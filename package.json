@@ -9,6 +9,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "npx tsc -w",
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "node --import tsx --test src/**/*.test.ts",
     "coverage": "node --import tsx --test --experimental-test-coverage src/**/*.test.ts",
     "lint": "eslint src"
