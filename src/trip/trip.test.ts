@@ -69,7 +69,7 @@ describe("searchTrip", () => {
     });
 
     const firstSolution = response.solutions[0];
-    assert.ok(firstSolution !== undefined);
+    if (firstSolution === undefined) throw new Error("No solutions returned");
 
     for (const section of firstSolution.sections) {
       assert.equal(section.geojson_infos.additionalGeoJson.type, "LineString");
