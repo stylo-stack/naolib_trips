@@ -1,0 +1,22 @@
+{
+  "name": "naolib_trips",
+  "version": "1.0.0",
+  "description": "A npm package for Naolib (Nantes) public transportation route finder",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "npx tsc -w",
+    "test": "node --import tsx --test src/**/*.test.ts"
+  },
+  "dependencies": {
+    "axios": "^1.14.0",
+    "typescript": "^6.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "tsx": "^4.21.0"
+  }
+}
