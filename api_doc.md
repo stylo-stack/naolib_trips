@@ -214,6 +214,92 @@ type GeoJsonInfos = {
 }
 ```
 
+---
+
+## Infotrafic
+
+Fetch current traffic disruptions affecting stops and parking POIs.
+
+```
+GET https://plan.naolib.fr/api/poi/infotrafic
+```
+
+No query parameters.
+
+### Response
+
+```ts
+{
+  pois:  InfotraficEntry[];   // disruptions attached to specific POIs (e.g. bike stations, parkings)
+  types: InfotraficTypeEntry[]; // event-based disruptions (e.g. carnival, public works)
+}
+```
+
+#### InfotraficEntry
+
+```ts
+type InfotraficEntry = {
+  id: number;
+  title: string;              // e.g. "81 Mangin - Travaux de réaménagement"
+  content: string;            // HTML-formatted description
+  startAt: string;            // e.g. "01/01/2026 à 00:00"
+  endAt: string;              // e.g. "01/12/2026 à 23:59"
+  pois: Poi[] | null;
+}
+```
+
+#### InfotraficTypeEntry
+
+Same shape as `InfotraficEntry` with one additional field:
+
+```ts
+type InfotraficTypeEntry = InfotraficEntry & {
+  type: string;               // e.g. "Carnaval de Nantes"
+}
+```
+
+#### Poi
+
+```ts
+type Poi = {
+  id: number;
+  type: string;               // e.g. "Bicloo Plus", "Parking centre-ville"
+  real_type: string;
+  name: string;
+  lat: number;
+  lng: number;
+  options: PoiOptions;
+  icon_poi: string;
+  instance: string;
+}
+```
+
+#### PoiOptions
+
+Fields vary by POI type. Common fields for parkings:
+
+```ts
+type PoiOptions = {
+  adresse?: string;
+  site_web?: string;
+  acces_pmr?: "OUI" | "NON";
+  capacite_pmr?: number;
+  presentation?: string;
+  url_redirect?: string;
+  capacite_moto?: number | string;
+  capacite_velo?: number | string;
+  grp_disponible?: number;
+  moyen_paiement?: string;
+  capacite_voiture?: number;
+  infos_complementaires?: string;
+  stationnement_velo_securise?: "OUI" | "NON";
+  capacite_vehicule_electrique?: number | string;
+  [key: string]: unknown;
+}
+```
+
+---
+
 #### PTRide (transit ride detail)
 
 ```ts
