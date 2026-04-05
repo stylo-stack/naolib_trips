@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { SearchParams, SearchResponse } from "./types.js";
+import { buildHeaders } from "../client.js";
 
 const BASE_URL = "https://plan.naolib.fr/api/autocomplete/itinerary";
 
@@ -8,7 +9,7 @@ export async function search(
 ): Promise<SearchResponse> {
   const response = await axios.get<SearchResponse>(BASE_URL, {
     params,
-    headers: { Referer: "https://plan.naolib.fr/", "X-Requested-With": "XMLHttpRequest" },
+    headers: await buildHeaders(),
   });
   return response.data;
 }
